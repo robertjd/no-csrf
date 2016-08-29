@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 exampleHtml = exampleHtml.replace(/URL/g, url);
 
 app.get('/', function (req, res) {
-  if(req.headers.host.match(otherDomain)){
+  if(otherDomain.match(req.headers.host)){
     return res.send(fs.readFileSync(path.join(__dirname,'views','other-domain.html'),'utf-8').replace(/BODY/g,exampleHtml));
   }
   res.render('index', {
