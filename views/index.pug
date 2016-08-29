@@ -1,0 +1,52 @@
+html
+  head
+    title NO CSRF Demo
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js")
+
+
+  body
+    script(type="text/javascript")
+      | hljs.initHighlightingOnLoad();
+
+    h1 NO CSRF Demo
+    p
+      span This webapp proves that you don't need CSRF protection if your endpoints only accepts POST requests which use the form:
+      pre
+        code Content-Type: application/json
+    p To prove the point, paste the follwing code into an HTML page on some other domain:
+
+    pre
+      code(class="html")=exampleHtml
+
+    p When this code attempts to run, you should see this error in the javascript console in the browser:
+
+    pre
+      code(class="sh").
+        XMLHttpRequest cannot load #{url}/form/json.
+        No 'Access-Control-Allow-Origin' header is present on the requested resource.
+        Origin 'http://domain-a.com:3000' is therefore not allowed access.
+
+    p
+      span This exception is thrown becuase this domain, #{url}, does not serve the necessary
+
+      span &nbsp;, causing a violation of the
+      a(href="") Same Origin Policy
+      span &nbsp;.
+      span In a trusted environment you can use
+      span &nbsp;
+      a(href="") CORS headers
+      span &nbsp; to whitelist cross-domain communication.
+
+    p
+      | In this example, you will also find that if you try to submit the form, you get a 415
+      | error from the server, so this avenue is explicity prohibited, thus removing any need
+      | for a CSRF solution.
+    p
+      | As such, for forms on your own domain, you will need to use JavaScript to post the forms
+      | to your server.  Here is a simple jQuery example that allows the form below to work:
+
+    p
+      | The server cooperates by issuing a redirect to the success page when rendering the form
+      | response.
+

@@ -1,0 +1,1 @@
+* It should prove that an endpoint that accepts only  JSON is not vulnerable to a CSR attack
