@@ -9,9 +9,9 @@ var exampleHtml = fs.readFileSync(path.join(__dirname,'views','example.html'),'u
 
 var port = process.env.PORT || 3000;
 
-var otherDomain = process.env.OTHER_DOMATIN || 'https://no-csrf-other-domain.herokuapp.com/';
+var otherDomain = process.env.OTHER_DOMATIN || 'https://csrf-attack.herokuapp.com/';
 
-var url = process.env.URL || 'http://localhost' + (process.env.PORT ? '' : ':'+port);
+var url = process.env.PRIMARY_URL || 'http://localhost' + (process.env.PORT ? '' : ':'+port);
 
 var app = express();
 
@@ -20,7 +20,7 @@ var jsonParser = bodyParser.json();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-exampleHtml = exampleHtml.replace(/URL/g, url);
+exampleHtml = exampleHtml.replace(/PRIMARY_URL/g, url);
 
 app.get('/', function (req, res) {
   if(otherDomain.match(req.headers.host)){
