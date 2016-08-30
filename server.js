@@ -28,7 +28,8 @@ app.get('/', function (req, res) {
   }
   res.render('index', {
     exampleHtml: exampleHtml,
-    url: url
+    url: url,
+    otherDomain: otherDomain
   });
 });
 

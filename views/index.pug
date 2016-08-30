@@ -14,7 +14,11 @@ html
       span This webapp proves that you don't need CSRF protection if your endpoints only accepts POST requests which use the form:
       pre
         code Content-Type: application/json
-    p To prove the point, paste the follwing code into an HTML page on some other domain:
+    p
+      | To prove the point, paste the follwing code into an HTML page on some other domain (or visit &nbsp;
+      a(href=otherDomain)=otherDomain
+      | &nbsp; to see this code live):
+
 
     pre
       code(class="html")=exampleHtml
