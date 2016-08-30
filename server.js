@@ -9,7 +9,7 @@ var exampleHtml = fs.readFileSync(path.join(__dirname,'views','example.html'),'u
 
 var port = process.env.PORT || 3000;
 
-var otherDomain = process.env.OTHER_DOMATIN || 'https://csrf-attack.herokuapp.com/';
+var otherDomain = process.env.OTHER_DOMATIN || 'https://csrf-attacker.herokuapp.com/';
 
 var url = process.env.PRIMARY_URL || 'http://localhost' + (process.env.PORT ? '' : ':'+port);
 
