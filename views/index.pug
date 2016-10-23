@@ -1,6 +1,6 @@
 html
   head
-    title NO CSRF Demo
+    title CSRF and JSON Endpoints
     link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css")
     script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js")
 
@@ -9,13 +9,13 @@ html
     script(type="text/javascript")
       | hljs.initHighlightingOnLoad();
 
-    h1 NO CSRF Demo
+    h1 CSRF and JSON Endpoints
     p
-      span This webapp proves that you don't need CSRF protection if your endpoints only accepts POST requests which use the form:
+      span This webapp proves that you don't need CSRF protection if your endpoints only accepts POST requests which define this content type header:
       pre
         code Content-Type: application/json
     p
-      | To prove the point, paste the follwing code into an HTML page on some other domain (or visit &nbsp;
+      | To prove the point, paste the following code into an HTML page on some other domain (or visit &nbsp;
       a(href=otherDomain)=otherDomain
       | &nbsp; to see this code live):
 
@@ -23,7 +23,7 @@ html
     pre
       code(class="html")=exampleHtml
 
-    p When this code attempts to run, you should see this error in the javascript console in the browser:
+    p When this code attempts to run, you should see this error in the JavaScript console in the browser:
 
     pre
       code(class="sh").
@@ -32,25 +32,18 @@ html
         Origin 'http://domain-a.com:3000' is therefore not allowed access.
 
     p
-      span This exception is thrown becuase this domain, #{url}, does not serve the necessary
-
-      span &nbsp;, causing a violation of the
+      span This exception is thrown because this domain, #{url}, does not serve the necessary CORS headers on the response, causing a violation of the&nbsp;
       a(href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy") Same Origin Policy
-      span &nbsp;.
+      span .&nbsp;
       span In a trusted environment you can use
       span &nbsp;
       a(href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS") CORS headers
-      span &nbsp; to whitelist cross-domain communication.
+      span &nbsp;to whitelist cross-domain communication.
 
-    p
-      | In this example, you will also find that if you try to submit the form, you get a 415
-      | error from the server, so this avenue is explicity prohibited, thus removing any need
-      | for a CSRF solution.
-    p
-      | As such, for forms on your own domain, you will need to use JavaScript to post the forms
-      | to your server.  Here is a simple jQuery example that allows the form below to work:
+    p In this example, you can also observe the following behavior:
 
-    p
-      | The server cooperates by issuing a redirect to the success page when rendering the form
-      | response.
-
+    ul
+      li
+        | If you try to submit the form, you get a 415 error from the server, so this avenue is explicitly prohibited, thus removing any need for a CSRF solution. As such, for forms on your own domain, you will need to use JavaScript to post the forms to your server.
+      li
+        | GET Requests also require trigger the same origin policy.

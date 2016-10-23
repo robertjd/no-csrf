@@ -7,6 +7,13 @@
   });
 </script>
 
+<script type="text/javascript">
+  $.ajax({
+    url: 'PRIMARY_URL/form/json',
+    method: 'GET'
+  });
+</script>
+
 <form action="PRIMARY_URL/form/json" method="POST">
   <label>Hello</label>
   <input type="text" name="hello" value="world"/>
